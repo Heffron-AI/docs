@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Heffron AI Docs",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/heffron-ai-logo.png",
+    "light": "/logo/heffron-ai-logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/heffron-ai-logo.png",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -18,34 +18,29 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:nick@heffron.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Login",
+    "url": "https://platform.heffron.ai/auth/login"
   },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "Change Log",
+      "url": "change-log"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "name": "WhatsApp Community",
+      "icon": "whatsapp",
+      "url": "https://chat.whatsapp.com/CHL5omlbYJH5vreq0SgtCu"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Pricing",
+      "icon": "credit-card",
+      "url": "https://www.heffron.ai/pricing"
     }
   ],
   "navigation": [
@@ -53,39 +48,19 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quick-start",
+        "manually-set-up-agent",
+        "remove-agent"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Change Log",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "change-log/introduction"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "linkedin": "https://www.linkedin.com/company/heffron-ai"
   }
 }
