@@ -54,6 +54,15 @@
       ]
     },
     {
+      "group": "Step by step guides",
+      "pages": [
+        "overview",
+        "update-agent",
+        "add-contacts",
+        "disable-agent"
+      ]
+    },
+    {
       "group": "Change Log",
       "pages": [
         "change-log/introduction"
