@@ -65,7 +65,8 @@
     {
       "group": "Change Log",
       "pages": [
-        "change-log/product-updates"
+        "change-log/product-updates",
+        "change-log/pricing-updates"
       ]
     }
   ],
