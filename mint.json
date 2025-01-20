@@ -58,8 +58,7 @@
       "pages": [
         "overview",
         "update-agent",
-        "add-contacts",
-        "disable-agent"
+        "add-contacts"
       ]
     },
     {
