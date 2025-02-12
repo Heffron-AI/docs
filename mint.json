@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Heffron AI Docs",
   "logo": {
-    "dark": "/logo/heffron-AI-logo.png",
-    "light": "/logo/heffron-AI-logo.png"
+    "dark": "/logo/heffron-dark.png",
+    "light": "/logo/heffron-light.png"
   },
   "favicon": "/logo/heffron-AI-logo.png",
   "colors": {
@@ -45,7 +45,7 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Getting Started",
       "pages": [
         "introduction",
         "quick-start",
@@ -54,11 +54,13 @@
       ]
     },
     {
-      "group": "Step by step guides",
+      "group": "Customisation",
       "pages": [
         "overview",
-        "update-agent",
-        "add-contacts"
+        "conversation-prompts",
+        "add-and-update-contacts",
+        "post-call-messaging",
+        "updating-your-agent"
       ]
     },
     {
