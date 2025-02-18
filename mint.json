@@ -1,9 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Voqo AI Docs",
+  "name": "Heffron AI Docs",
   "logo": {
-    "dark": "/logo/voqo-logo-dark.png",
-    "light": "/logo/voqo-logo-light.png"
+    "dark": "/logo/heffron-AI-logo.png",
+    "light": "/logo/heffron-AI-logo.png"
   },
   "favicon": "/logo/heffron-AI-logo.png",
   "colors": {
@@ -45,7 +45,7 @@
   ],
   "navigation": [
     {
-      "group": "Getting Started",
+      "group": "Get Started",
       "pages": [
         "introduction",
         "quick-start",
@@ -54,14 +54,11 @@
       ]
     },
     {
-      "group": "Customisation",
+      "group": "Step by step guides",
       "pages": [
         "overview",
-        "agent-settings",
-        "conversation-prompts",
-        "add-and-update-contacts",
-        "post-call-messaging",
-        "updating-your-agent"
+        "update-agent",
+        "add-contacts"
       ]
     },
     {
@@ -73,6 +70,6 @@
     }
   ],
   "footerSocials": {
-    "linkedin": "https://www.linkedin.com/company/voqo-ai"
+    "linkedin": "https://www.linkedin.com/company/heffron-ai"
   }
 }
