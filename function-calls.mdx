@@ -1,0 +1,70 @@
+---
+title: Function Call Agent Actions
+description: 'Configure the capabilities of your agent with function calls'
+---
+During the conversation with a caller, you can configure your agent to perform certain actions at the request of the caller. This is done by configuring the various function calls available.
+
+This guide covers how to define and customize function calls for your AI agent.
+
+This Function Call feature is displayed on the Platform dashboard alongside the [Custom Prompt](conversation-prompts#custom-prompts) feature.
+
+### Quick Overview
+
+<CardGroup>
+  <Card title="End Call" icon="phone-slash">
+    **Cost:** Free  
+    **Customisable Aspects:** 
+    - Transition message
+  </Card>
+
+  <Card title="Transfer Call" icon="phone-arrow-right">
+    **Cost:** 10 credits, 40 credits per minute of the transferred call  
+    **Customisable Aspects:**  
+    - Transition message.
+    - Display Agent's or caller's number to transferee.
+    - Warm transfer or Cold.
+    - List of transferrable contacts.
+  </Card>
+</CardGroup>
+
+## End Call
+End Call is a simple function call in which the Agent intelligently determines when to end the call based on the conversation with the caller.
+
+It's free of cost and available for all agents.
+
+#### Transition Message
+Users can customize the goodbye message that the Agent delivers to the caller before ending the call.
+
+<Frame>
+  <img src="/images/function-call/end-call-config.webp" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## Transfer Call
+Transfer Call is allows agent to transfer the call to another number, at the request of the caller. It is available for all agents.
+
+Each Transfer Call request is charged at a cost of 10 credits. Once the transferred call is in progress, it will be charged at a rate of 40 credits per minute, independently from the initial AI call.
+
+#### Transition Message
+Custom message the Agent delivers to the caller before attempting to transfer the call to the desired transferee.
+
+#### Display Agent Caller ID
+Whether the transferree should see the Agent's phone number or the caller's phone number in the dialled call.
+
+#### Warm vs Cold Transfer
+Select between either Warm or Cold transfer.
+Warm transfer allows the transferree to hear a summary of the previous AI call whilst the call is still connecting. This way the transferree can be provided some context of the previous call.
+Cold transfer has no summary of the previous call.
+
+#### Transferrable Contacts
+A list of contacts the agents can transfer the call to. The contacts are mapped between name and number
+
+The agent can use the name in the conversation to help caller identify whom they wish to transfer the call to.
+
+<u>NOTE</u>: The numbers must entered in E.164 format, and we only support Australian numbers at the moment. I.e. +614XXXXXXXX for mobile, or +61XYYYYYYYY for landline where X is not 4.
+
+<Frame>
+  <img src="/images/function-call/transfer-call-config.webp" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## Custom Function Call
+coming soon...
