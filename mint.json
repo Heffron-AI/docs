@@ -18,12 +18,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:nick@heffron.ai"
+      "url": "mailto:adam@heffron.ai"
     }
   ],
   "topbarCtaButton": {
     "name": "Login",
-    "url": "https://platform.heffron.ai/auth/login"
+    "url": "https://platform.voqo.ai/auth/login"
   },
   "tabs": [
     {
@@ -40,7 +40,7 @@
     {
       "name": "Pricing",
       "icon": "credit-card",
-      "url": "https://www.heffron.ai/pricing"
+      "url": "https://www.voqo.ai/pricing"
     }
   ],
   "navigation": [
