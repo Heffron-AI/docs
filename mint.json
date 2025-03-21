@@ -5,7 +5,7 @@
     "dark": "/logo/voqo-logo-dark.png",
     "light": "/logo/voqo-logo-light.png"
   },
-  "favicon": "/logo/heffron-AI-logo.svg",
+  "favicon": "/logo/heffron-ai-logo.svg",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -62,7 +62,7 @@
         "conversation-prompts",
         "add-and-update-contacts",
         "post-call-messaging",
-        "updating-your-agent"
+        "function-calls"
       ]
     },
     {
