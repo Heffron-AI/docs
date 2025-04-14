@@ -56,13 +56,20 @@
     {
       "group": "Customisation",
       "pages": [
-        "overview",
+        "overview-customisation",
         "agent-settings",
         "agent-advanced-settings",
         "conversation-prompts",
         "add-and-update-contacts",
         "post-call-messaging",
         "function-calls"
+      ]
+    },
+    {
+      "group": "Integration",
+      "pages": [
+        "overview-integration",
+        "webhook-integration-guide"
       ]
     },
     {

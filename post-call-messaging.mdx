@@ -2,11 +2,14 @@
 title: 'Post-Call Messaging'
 description: "Choose how you recieve conversation summaries of every call your agent picks up."
 ---
-The **Post-Call Messaging** feature allows you to receive a summary of every call your AI agent picks up, delivered via SMS, Email, or both. 
+The **Post-Call Messaging** feature allows you to receive a summary of every call your AI agent picks up, delivered via SMS, Email, Webhook or all three. 
 
 Enabling both SMS and Email notifications will result in **higher credit usage**.
 
-> **Note:** A maximum of **10 post-call actions** can be configured per call. 
+<Warning>
+{/* mintlify callout boxes */}
+A maximum of **10 post-call actions** can be configured per call. 
+</Warning>
 ### Quick Overview
 
 <CardGroup>
@@ -29,6 +32,23 @@ Enabling both SMS and Email notifications will result in **higher credit usage**
     - Call transcript
     - Call recording url
   </Card>
+
+  <Card title="Webhook" icon="webhook" href="post-call-messaging#webhook">
+    **Cost:** Free  
+    **Call Information:**  
+    - Caller ID
+    - Contact name
+    - Call summary
+    - Caller phone type
+    - Call duration
+    - Call transcript
+    - Call recording url
+    - Call status
+    - Call start time
+    - Call end time
+    - Post call actions results
+    - Call conversation timestamps
+  </Card>
 </CardGroup>
 
 <br />
@@ -49,6 +69,27 @@ Choosing email notifications provides **everything in SMS**, plus:
 - The **call duration**, showing how long the conversation lasted.
 - A **full transcript** of the call for complete context.
 - A **recording URL** allowing you to listen to the entire conversation.
-  > *Call recordings are saved for up to 6 months. <a href="mailto:adam@heffron.ai?subject=Request to Remove Call Recording">Contact us</a> if you need to remove a recording sooner*.
+<Note>
+Call recordings are saved for up to 6 months. <a href="mailto:adam@heffron.ai?subject=Request to Remove Call Recording">Contact us</a> if you need to remove a recording sooner.
+</Note>
 
 Emails offer a more comprehensive record of your conversations, making them ideal for documentation and review purposes.
+
+### Webhook
+Configuring webhook post call messages provides **all call information**, which is **everything in email**, plus: 
+- The **status of the call**, whether it was "completed", "failed", or another outcome.
+- The **call start and end times**, indicating exactly when the conversation began and concluded.
+- The **results of post-call actions**, showing the outcomes of the other configured post call actions, if any.
+- The **timestamps for key conversation events**, detailing when significant moments occurred during the call.
+
+Webhook notifications deliver a complete JSON payload to your specified endpoint once a call ends. Unlike SMS or Email—which provide formatted text summaries—webhooks offer the raw, structured call data for full integration into your systems, which is perfect if you need:
+- **Real-Time Data Integration:** Instantly process call data in your internal systems, dashboards, or third-party applications.
+- **Automation:** Trigger custom workflows or alerts based on specific call events.
+- **Comprehensive Logging:** Store detailed call records for further analysis without manual intervention.
+
+<Warning>
+A **Webhook Secret** must be configured if you wish to verify the webhook signature. This can be done on the platform's <a href="https://platform.voqo.ai/developer_tools">Developer Tools</a> section. 
+</Warning>
+<Info>
+View the <a href="webhook-integration-guide">Webhook Integration Guide</a> page.
+</Info>

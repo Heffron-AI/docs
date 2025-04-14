@@ -1,0 +1,296 @@
+---
+title: 'Webhook Integration Guide'
+description: ""
+---
+Version: 0.2
+
+Last Updated: April 14, 2025
+
+# 1. Overview
+
+This document describes how to integrate with our AI Phone Answering Agents webhook system. Our system sends real-time updates about phone call interactions to your endpoint through HTTP POST requests.
+
+### Prerequisites
+
+- A publicly accessible HTTPS endpoint
+- Ability to process JSON payloads
+- Authentication credentials (provided separately)
+
+<Info>
+**What is not in this document:**
+1. The API docs are not in this document. We are working on making the endpoints public by the end of Q4 2024.
+2. The developer testing account provided alongside this document has limited functionalities. Most importantly, it only has 1 agent connected to 1 phone number.
+
+**Notes:**
+1. The schemas provided in this document are still unstable as of the time of writing. We are actively improving our system.
+</Info>
+
+
+
+# 2. Webhook Setup
+
+<Tip>
+Please contact [adam@heffron.ai](mailto:adam@heffron.ai) to obtain a testing account.
+</Tip>
+
+
+## 2.1 Configuring Your Webhook URL on the platform
+
+1. Log in to your dashboard at `[testing environment url]` on your computer. 
+2. On the sidebar, navigate to the footer **Developer Tools**
+    1. Developer Tools are currently unavailable on mobile view.
+3. Under `Your Webhook Secret` click "+" to create a new webhook secret.
+4. Fill in the following details:
+    - Webhook URL: Your HTTPS endpoint that will receive the events
+5. Store your webhook secret securely - you'll need it to verify incoming requests
+
+# 3. Authentication
+
+## 3.1 Headers
+
+All webhook requests include the following authentication headers:
+
+```
+X-Webhook-Signature: [HMAC signature]
+```
+
+## 3.2 Verification
+
+An example FastAPI server for Webhook Receiving (inclu. signature verification) can be found below:
+
+```python
+# A QUICK PYTHON SERVER FILE TO PROCESS INCOMING WEBHOOK, as a proof of concept
+# run server via `$ uvicorn webhook_receiver:app --port 8080 --reload`
+
+from fastapi import FastAPI, Request, HTTPException, status
+import hmac
+import hashlib
+import time
+import logging
+import json
+
+app = FastAPI()
+logger = logging.getLogger(__name__)
+
+WEBHOOK_SECRET = "whsec_HREmNnq5mKLlFNh1l9RO5Zi8wdcuaggf6l67e0Uqjn0"
+MAX_TIMESTAMP_DIFF = 300  # 5 mins
+
+def verify_signature(payload_body: str, signature: str, timestamp: str) -> bool:
+    """
+    Helper fnc to verify the webhook signature and timestamp
+    """
+    try:
+        timestamp_int = int(timestamp)
+        current_time = int(time.time())
+        if abs(current_time - timestamp_int) > MAX_TIMESTAMP_DIFF:
+            logger.warning(
+                f"Webhook timestamp too old. Current time: {current_time}, "
+                f"Webhook time: {timestamp_int}, "
+            )
+            return False
+    except ValueError:
+        logger.error(f"Invalid timestamp format: {timestamp}")
+        return False
+
+    expected_signature = hmac.new(
+        WEBHOOK_SECRET.encode('utf-8'),
+        payload_body.encode('utf-8'),
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected_signature, signature)
+
+@app.post("/webhook/receive")
+async def receive_webhook(request: Request):
+    """
+    Endpoint to receive the webhooks
+    """
+    body = await request.body()
+    payload_body = body.decode()
+    
+    signature = request.headers.get("X-Webhook-Signature")
+    timestamp = request.headers.get("X-Webhook-Timestamp")
+    
+    if not signature or not timestamp:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing signature or timestamp"
+        )
+    
+    if not verify_signature(payload_body, signature, timestamp):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid signature"
+        )
+    
+    try:
+        data = json.loads(payload_body)
+        logger.info(f"Received valid webhook: {json.dumps(data, indent=2)}")
+        return {"status": "success", "message": "Webhook received and verified"}
+    except json.JSONDecodeError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid JSON payload"
+        )
+
+```
+
+# 4. Webhook Events
+
+Our system emits the following event types:
+
+| Event Type | Description | Trigger |
+| --- | --- | --- |
+| `call_ended` | Call has completed | When a phone call ends |
+
+# 5. Error Handling
+
+### Retry Policy
+
+- Failed deliveries are retried a total of 3 times
+- Backoff delay between retries: 5 seconds
+- Webhook timeout threshold: 10 seconds
+
+### Error Response Code
+
+The following are HTTP Code descriptions related to Webhook transmission, given that a `webhook_url` and webhook secret has already been set by user via the platform. 
+
+| HTTP Code | Meaning | Action Required |
+| --- | --- | --- |
+| 200 | Webhook has been successfully sent and received. | None. |
+| 4xx | Client Error | Fix Integration on Client Side. |
+| 5xx | Server Error | Request will be retried. |
+
+# 6. Integration Guide
+
+## 6.1 Sample payload
+
+### **Call Success**
+
+```json
+{
+  "_id": "671a14adb4e6f3252807fd5e",
+  "event_type": "call_ended",
+  "timestamp": 1729762448,
+  "data": {
+    "id": "671a1495b4e6f3252807fd5d",
+    "agent_id": "66ff95645e57c2873ff376cf",
+    "answer_machine": null,
+    "call_summary": "The caller did not fully engage with the assistant.",
+    "from_phone": "+61473358879",
+    "to_phone": "+61899229387",
+    "direction": "inbound",
+    "created_by": null,
+    "status": "completed",
+    "error": null,
+    "transcript": "BOT: Hi there, I'm John's Agent Skynet, may I ask who's calling?\nHUMAN: Thank you. Goodbye.\nBOT: I will let the Boss know that you've called, they will reach out to you as soon as possible.\nBOT: Goodbye!",
+    "duration": 20,
+    "created_at": "2024-10-24T09:34:13.040000",
+    "updated_at": "2024-10-24T09:34:13.040000",
+    "start_time": "2024-10-24T09:34:12",
+    "end_time": "2024-10-24T09:34:32",
+    "post_call_action_results": [
+      {
+        "created_at": "2024-10-24T09:34:03.344000",
+        "destination": "+61473358879",
+        "error": null,
+        "message": "New Call (Skynet)\nFrom: +61473358879\n\nThe caller did not engage with the assistant.",
+        "source": "+61483981303",
+        "status": "success",
+        "status_message": null,
+        "type": "send_sms"
+      }
+    ],
+    "recording_url": "https://example.com/CA12345678910.wav",
+    "recording_url_expires_at": "2024-10-24T09:34:13.040000",
+    "timestamps": [
+      {
+        "timestamp": 1744356337.9487917, 
+        "event_type": "message", 
+        "message_type": "bot", 
+        "text": "Hi, I am RayBlack's assistant, George Droyd. May I ask who is calling?"
+      },
+      {
+        "timestamp": 1744356346.2009048, 
+        "event_type": "message", 
+        "message_type": "human", 
+        "text": "This is John. Goodbye"
+      },
+      {
+        "timestamp": 1744356358.3612301, 
+        "event_type": "action_start", 
+        "action_id": "67f8c4061656bf13a7b9a927", 
+        "action_type": "action_end_call", 
+        "action_config": {
+          "type": "action_end_call", 
+          "transition_message": "Goodbye, take care!"
+        }, 
+        "action_input": {
+          "type": "action_end_call"
+        }
+      },
+      {
+        "timestamp": 1744356358.3666494, 
+        "event_type": "action_end", 
+        "action_id": "67f8c4061656bf13a7b9a927", 
+        "action_type": "action_end_call", 
+        "action_output": {
+          "type": "action_end_call", 
+          "status": "success", 
+          "status_message": null
+        }
+      }
+    ]
+  }
+}
+```
+
+### **Call Failure**
+
+```json
+{
+  "_id": "671a14adb4e6f3252807fd5e",
+  "event_type": "call_ended",
+  "timestamp": 1729762448,
+  "data": {
+    "id": "671a1495b4e6f3252807fd5d",
+    "agent_id": "66ff95645e57c2873ff376cf",
+    "answer_machine": null,
+    "call_summary": "Transcript is empty",
+    "from_phone": "+61473358879",
+    "to_phone": "+61899229387",
+    "direction": "inbound",
+    "created_by": null,
+    "status": "failed",
+    "error": "Call failed to connect.",
+    "answer_machine": null,
+    "transcript": "HUMAN: No transcript available",
+    "duration": "0",
+    "created_at": "2024-10-01T07:48:53.130000",
+    "updated_at": "2024-10-01T07:48:53.130000",
+    "start_time": "2024-10-01T07:48:53",
+    "end_time": "2024-10-01T07:48:53",
+    "post_call_action_results": [],
+    "recording_url": null,
+    "recording_url_expires_at": null,
+    "timestamps": [
+      {
+        "timestamp": 1744356337.9487917, 
+        "event_type": "message", 
+        "message_type": "bot", 
+        "text": "No trascript available"
+      },
+    ]
+  }
+}
+```
+
+# 7. Sample Integration
+
+A demo video can be found at <a href="https://drive.google.com/file/d/1tyU2M8jl-EKH706_ow1vw1MUkYpii2SG/view?usp=drive_link">this link</a>.
+
+# 8. Support
+
+For integration support, contact:
+
+- Email: adam@heffron.ai
+- Technical Support: +61 451 660 338
