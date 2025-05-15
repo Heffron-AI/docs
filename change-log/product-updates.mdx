@@ -2,24 +2,66 @@
 title: 'Product Updates'
 description: 'New updates and improvements'
 ---
-<Update label="1st of Aprip 2025">
+<Update label="15th of May 2025">
 
-# New Features
+## 1. New Features
+- **Block calls to specific numbers**:
+You can now create a blacklist of phone numbers you never want your Agent to converse with.
+Once a Contact is toggled to be blocked, the Agent will automatically skip dials from that number so you never
+incur unwanted call charges.
+- **Onboarding**:
+Upon creating a new account, users will expereience a new and smooth onboarding flow to get their AI Agent up
+and running in no time.
+- **Email Notifications**:
+Stay on top of your account stats by receiving friendly notifications when important events occur:
+  - Monthly Summary
+  - 80% and 100% Usage of Free Tier Credits
+  - First Successful Call
+  - First Ten Successful Calls
+- **Post Call Webhooks**:
+After each call, we'll send a comprehensive JSON payload—including call metadata, transcript, and sentiment
+analysis—to your specified endpoint. Ideal for CRM updates, analytics pipelines or custom dashboards. Please view the <a href="../webhook-integration-guide">Webhook Integration Guide</a> for more information.
+- **Post Call SMS Multilingual Support**:
+Recieve your Post-Call SMS in one of eight languages (English, Spanish, Chinese, Hindi, Arabic, French, Japanese, German).
+This can be selected in the Post Call settings.
+- **Post Call Email Custom Subject**:
+Personalise your Post Call Email summary by adding a custom email subject.
+- **Knowledge Base** *(Paid Tiers Only)*:
+Upload documents, FAQs, or policy manuals so your Agent can reference them in real time.
+This speeds up response times and ensures accuracy in domain-specific conversations
+- **Disable Call Recording**:
+Users can choose to allow conversations between their Agent and Callers to be recorded or not.
+Choosing not to record will not allow call recording playback in the Call Logs for the affected calls. This is also
+perfect for compliance with strict privacy regulations.
+
+## 2. Improvement
+- **Warm Transfer Call Fix**:
+We resolved an issue that prevented the “Warm Transfer” prompt from firing correctly.
+Now, your transfer recipients will always receive a contextual briefing before the call connects
+- **Smarter End-Call Logic**:
+The Agent will now interpret conversational cues (e.g., “Thanks, that’s all”) and end calls more naturally—avoiding
+awkward pauses or premature hang-ups.
+
+</Update>
+
+<Update label="1st of April 2025">
+
+## New Features
 - **Turn detection model**: Added a new turn detection model to improve the accuracy of the agent's responses. This model is designed to better understand when the user is speaking and when the agent should respond.
 
 </Update>
 
 <Update label="18th of March 2025">
 
-# New Features
+## 1. New Features
 - **End call by agent**: Added a checkbox to allow / disable AI agent ending call by itself. Calls will be ended when the agent says 'bye' or 'goodbye'
 - **User interruption**: Added a checkbox to allow users interrupt the AI agent. Callers can interrupt the agent.
 
-# Improvement
+## 2. Improvement
 - Call recording link takes longer to expire
 - Textarea for writing custom prompt can now be resized
 
-# Fix
+## 3. Fix
 - Fixed an issue with agent where it does not save on blur
 - Fixed an issue where new singups are stuck in loading screen
 - Fixed an issue where some agents have null prompt template variables attribute
