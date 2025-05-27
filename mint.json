@@ -48,6 +48,7 @@
       "group": "Getting Started",
       "pages": [
         "introduction",
+        "install-mobile",
         "quick-start",
         "manually-set-up-agent",
         "remove-agent"
