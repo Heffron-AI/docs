@@ -68,8 +68,8 @@
     {
       "group": "Post-Call Actions",
       "pages": [
-        "post-call-email-summary",
-        "post-call-messaging"
+        "post-call-messaging",
+        "post-call-email-summary"
       ]
     },
     {
