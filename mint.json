@@ -55,15 +55,27 @@
       ]
     },
     {
-      "group": "Customisation",
+      "group": "Agent Settings",
       "pages": [
         "overview-customisation",
         "agent-settings",
         "agent-advanced-settings",
         "conversation-prompts",
         "add-and-update-contacts",
-        "post-call-messaging",
         "function-calls"
+      ]
+    },
+    {
+      "group": "Post-Call Actions",
+      "pages": [
+        "post-call-email-summary",
+        "post-call-messaging"
+      ]
+    },
+    {
+      "group": "Call Logs",
+      "pages": [
+        "overview-call-logs"
       ]
     },
     {
