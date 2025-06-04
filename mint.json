@@ -55,6 +55,14 @@
       ]
     },
     {
+      "group": "Connect Agent to Your Phone",
+      "pages": [
+        "connect-agent-overview",
+        "connect-agent-us",
+        "connect-agent-au"
+      ]
+    },
+    {
       "group": "Agent Settings",
       "pages": [
         "overview-customisation",
