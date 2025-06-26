@@ -69,6 +69,7 @@
         "agent-settings",
         "agent-advanced-settings",
         "conversation-prompts",
+        "prompt-refiner",
         "add-and-update-contacts",
         "function-calls"
       ]
