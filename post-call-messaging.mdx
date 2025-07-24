@@ -1,8 +1,8 @@
 ---
 title: 'Overview'
-description: "Choose how you recieve conversation summaries of every call your agent picks up."
+description: "Choose how you receive conversation summaries of every call your agent picks up."
 ---
-The **Post-Call Actions** feature allows you to receive a summary of every call your AI agent picks up, delivered via SMS, Email, Webhook or all three. 
+The **Post-Call Actions** feature allows you to receive a summary of every call your AI agent picks up, delivered via SMS, Email, Webhook, or all three. 
 
 Enabling both SMS and Email notifications will result in **higher credit usage**.
 
@@ -14,7 +14,7 @@ A maximum of **10 post-call actions** can be configured per call.
 
 <CardGroup>
   <Card title="SMS" icon="comment-sms" href="post-call-messaging#sms">
-    **Cost:** 10 credits    
+    **Cost:** 25 credits    
     **Call Information:** 
     - Caller ID
     - Contact name
@@ -48,6 +48,17 @@ A maximum of **10 post-call actions** can be configured per call.
     - Call end time
     - Post call actions results
     - Call conversation timestamps
+  </Card>
+
+  <Card title="SMS to Caller" icon="comment-sms" href="post-call-messaging#sms-to-caller">
+    **Cost:** 20 credits (only for custom messages)   
+    **Call Information (FREE Tier):** 
+    - Your Caller ID
+    - Call summary
+    - Voqo's end call growth loop (based on caller's response)
+    - Voqo AI's branding<br/>**Call Information (PAID Tier):** 
+    - Your custom message (if configured)
+    - Otherwise, same as Free Tier
   </Card>
 </CardGroup>
 
@@ -92,4 +103,40 @@ A **Webhook Secret** must be configured if you wish to verify the webhook signat
 </Warning>
 <Info>
 View the <a href="webhook-integration-guide">Webhook Integration Guide</a> page.
+</Info>
+
+### SMS to Caller
+The **SMS to Caller** feature allows your agent to automatically send a follow-up SMS to the person who chatted with your AI agent, after every call.
+
+#### How it works:
+- **Free Tier:**
+  - The message is always Voqo-branded and cannot be customized.
+  - The SMS includes:
+    - Your number the caller rang
+    - A summary of the call
+    - Voqo's end call growth loop (if the caller expresses interest)
+    - Voqo AI's branding and signup link
+  - **Cost:** Free (no credits charged)
+- **Paid Tier:**
+  - You can fully customize the message sent to your callers.
+  - If you leave the message field empty, the default Voqo-branded message is used (same as Free Tier, and still free).
+  - If you enter a custom message, your message is sent **exactly as written** (no Voqo branding or growth loop appended), and you are charged **20 credits** per SMS.
+  - **Cost:** 20 credits per custom message; free if using the default.
+
+#### Growth Loop Logic
+- The Voqo-branded message (default) includes a smart growth loop:
+  - If the caller expresses interest in learning more about the AI agent, the SMS will include a line inviting them to sign up for Voqo AI.
+  - This is detected automatically by analyzing the call transcript.
+- If you use a custom message, **the growth loop and branding are not appended**—your message is sent as-is.
+
+#### Non-Interactive Calls
+- If the call transcript does **not** contain any human input (i.e., the agent only spoke to voicemail or silence), **no SMS to caller is sent** and no credits are charged.
+
+#### Why use SMS to Caller?
+- **Drive more signups:** The viral loop in the default message helps spread awareness of your business and Voqo AI.
+- **Professional follow-up:** Paid users can send branded, personalized follow-ups to every caller.
+- **No surprises:** You only pay for custom messages; the default is always free.
+
+<Info>
+You can enable or disable the SMS to Caller action for each agent, and configure the message and End Call Growth Loop settings in your agent's dashboard.
 </Info>

@@ -25,6 +25,18 @@ This Function Call feature is displayed on the Platform dashboard alongside the 
     - Warm transfer or Cold.
     - List of transferrable contacts.
   </Card>
+
+  {/* satellite-dish, code-merge */}
+  <Card title="Custom Function Call" icon="satellite-dish" href="function-calls#custom-function-call">
+    **Cost:** Free  
+    **Customisable Aspects:**
+    - Transition message
+    - Function prompt description
+    - External API Integration
+    - Authentication Methods
+    - Request/Response Processing
+    - Error Handling & Retries
+  </Card>
 </CardGroup>
 
 ## End Call
@@ -60,11 +72,382 @@ A list of contacts the agents can transfer the call to. The contacts are mapped 
 
 The agent can use the name in the conversation to help caller identify whom they wish to transfer the call to.
 
-> <u>NOTE</u>: The numbers must entered in E.164 format, and we only support Australian numbers at the moment. I.e. +614XXXXXXXX for mobile, or +61XYYYYYYYY for landline where X is not 4.
+<Warning>
+{/* mintlify callout boxes */}
+The numbers must entered in E.164 format, and we only support Australian numbers at the moment. I.e. +614XXXXXXXX for mobile, or +61XYYYYYYYY for landline where X is not 4.
+</Warning>
 
 <Frame>
   <img src="/images/function-call/transfer-call-config.webp" style={{ borderRadius: '0.5rem' }} />
 </Frame>
 
 ## Custom Function Call
-coming soon...
+
+The Custom Function Call feature enables your AI agent to dynamically call external APIs during conversations, allowing it to fetch real-time data, perform actions, or integrate with third-party services. This powerful capability transforms your agent from a static conversational AI into a dynamic, action-oriented assistant.
+
+### Key Features
+
+- **Dynamic API Integration**: Connect to any REST API endpoint
+- **Multiple Authentication Methods**: Support for API keys, Bearer tokens, Basic auth, and webhook secrets
+- **Intelligent Parameter Mapping**: Automatic URL templating and parameter substitution
+- **Response Processing**: Extract and structure data from API responses
+- **Error Handling**: Configurable retry logic and error mapping
+- **Secure Credential Storage**: Encrypted storage of sensitive API keys and passwords
+
+### Configuration Overview
+<Frame>
+  <img src="/images/function-call/custom-fnc-call-config.webp" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+### Function Configuration
+
+#### Function Name
+A unique identifier for your custom function (e.g., `get_weather_forecast`, `fetch_github_profile`). This name is used by the AI agent to identify and call the appropriate function during conversations.
+
+#### Function Description
+A clear, detailed description of what the function does. Include relevant keywords to help the AI agent understand when to use this function:
+
+```
+"Retrieve weather forecast and climate data for specific locations and dates. Use this function when the caller asks about weather conditions, temperature, or climate information."
+```
+
+#### Parameter Specification
+Define the input parameters your function accepts using JSON Schema format, abiding by [OpenAPI Specification](https://swagger.io/specification/):
+
+<Tip>
+Additionally refer to OpenAI's [cookbook](https://cookbook.openai.com/examples/function_calling_with_an_openapi_spec) for an easy-to-follow example.
+</Tip>
+
+```json
+{
+  "location": {
+    "type": "string",
+    "description": "The city, state, or location for weather forecast (e.g., 'Sydney, NSW')",
+    "required": true,
+    "minLength": 2,
+    "maxLength": 100
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date for weather forecast in YYYY-MM-DD format. For single day requests, use the same date as end_date. For multiple days, use the earliest requested date to create an optimal date range.",
+    "format": "date",
+    "required": true,
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date for weather forecast in YYYY-MM-DD format. For single day requests, use the same date as start_date. For multiple days, use the latest requested date to create an optimal date range that covers all requested days.",
+    "format": "date",
+    "required": true,
+  },
+  "unitGroup": {
+    "type": "string",
+    "required": false,
+    "default": "metric",
+    "enum": ["metric", "us", "uk"],
+    "description": "Temperature unit system"
+  },
+  "include": {
+    "type": "string",
+    "required": false,
+    "default": "days",
+    "enum": ["days", "hours", "current"],
+    "description": "Data granularity level"
+  }
+}
+```
+
+### API Configuration
+
+#### API Endpoint
+The URL endpoint for your external API. Supports parameter templating using `{parameter_name}` syntax:
+
+```
+https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{start_date}/{end_date}
+```
+
+#### HTTP Method
+Select the appropriate HTTP method for your API (GET, POST, PUT, PATCH, DELETE).
+
+#### Timeout
+Maximum time (in seconds) to wait for the API response before timing out (default: 30 seconds).
+
+### Authentication Methods
+
+Custom Function Call supports four authentication methods to accommodate different API security requirements:
+
+#### 1. API Key Authentication
+Use for APIs that require an API key in headers or query parameters.
+
+**Configuration:**
+- **API Key**: Your authentication key (include prefix if required, e.g., `Bearer your_key` or `token your_key`)
+- **Header Name**: Custom header name (e.g., `Authorization`, `X-API-Key`)
+- **Query Parameter Name**: Query parameter name (e.g., `key`, `api_key`)
+
+**Examples:**
+```bash
+# GitHub API (Header)
+Authorization: Bearer ghp_your_token_here
+
+# Weather API (Query Parameter)  
+https://api.weather.com/forecast?location=sydney&key=your_api_key
+
+# Custom Header
+X-API-Key: your_api_key_here
+```
+
+#### 2. Bearer Token Authentication
+Standard OAuth2 Bearer token authentication.
+
+**Configuration:**
+- **Bearer Token**: Your OAuth2 access token
+
+**Example:**
+```bash
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+#### 3. Basic Authentication
+HTTP Basic authentication using username and password.
+
+**Configuration:**
+- **Username**: Your API username
+- **Password**: Your API password
+
+<Note>
+Credentials are automatically base64 encoded and prefixed with "Basic " in the Authorization header. Additionally password is also hashed when stored, for security reasons.
+</Note>
+#### 4. Webhook Secret Authentication
+For APIs that require webhook signature verification.
+
+**Configuration:**
+- **Webhook Secret**: Your webhook signing secret
+- **Event Type**: Custom event type (default: `voqo.custom_function_call`)
+
+<Note>
+We only support POST requests for webhook authentication.
+</Note>
+
+### Response Processing
+
+#### Response Extraction
+Map API response fields to variables, via simple path dot notation, that can be used in the conversation:
+
+```json
+{
+  "location": "resolvedAddress",
+  "first_day_temp": "days[0].temperature",
+  "all_days_max_temp": "days[*].tempmax"
+}
+```
+
+**Path Syntax:**
+- Simple paths: `current.temperature`
+- Array access: `forecast[0].date`
+- Wildcard arrays: `forecast[*].tempMax`
+
+#### Success Criteria
+Define conditions that determine if the API call was successful:
+
+```json
+{
+  "status_code": 200,
+  "response_has": "temperature",
+  "response_not_has": "error"
+}
+```
+
+#### Error Mapping
+Map API error responses to user-friendly messages:
+
+```json
+{
+  "401": "Authentication failed. Please check your API credentials.",
+  "404": "Location not found. Please check the city name.",
+  "429": "Rate limit exceeded. Please try again later."
+}
+```
+
+### Retry Configuration
+
+Configure automatic retry behavior for failed API calls:
+
+- **Max Attempts**: Maximum number of retry attempts (default: 3)
+- **Initial Delay**: Starting delay between retries in seconds (default: 1.0)
+- **Max Delay**: Maximum delay between retries in seconds (default: 10.0)
+- **Backoff Factor**: Multiplier to increase delay between retries (default: 2.0)
+
+### Security & Best Practices
+
+#### Credential Security
+- All secrets (API keys, passwords, webhook secrets) are encrypted at rest.
+- Secrets are never stored in plain text.
+- Secrets are automatically masked in the UI for security.
+
+#### API Key Prefixes
+When using API Key authentication, include any required prefixes in the API key field:
+- GitHub: `Bearer ghp_your_token_here`
+- Some APIs: `token your_token_here`
+- Simple APIs: `your_key_here` (no prefix)
+
+#### Rate Limiting
+- Implement appropriate timeout values to avoid API rate limits
+- Use retry configuration with exponential backoff for transient failures
+- Consider API usage limits when designing function calls
+
+### Example Configurations
+
+#### Weather API GET Request
+```json
+{
+  "transition_message": "grabbing climate info, please wait",
+  "function_name": "get_weather_forecast",
+  "function_description": "Retrieve weather forecast and climate data for specific locations and dates. Keywords: weather, forecast, temperature, climate, precipitation, rain, sunny, cold, hot, atmospheric, humidity, wind. Use this function ONLY when the caller asks about weather conditions, temperature, precipitation, climate, or atmospheric conditions for a specific location and date range. Requires location, start_date, and end_date parameters.",
+  "parameter_specification": {
+    "location": {
+      "type": "string",
+      "required": true,
+      "description": "The city, state, or location for weather forecast (e.g., 'San Francisco, CA')",
+      "minLength": 2,
+      "maxLength": 100
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "required": true,
+      "description": "Start date for weather forecast in YYYY-MM-DD format. For single day requests, use the same date as end_date. For multiple days, use the earliest requested date to create an optimal date range."
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "required": true,
+      "description": "End date for weather forecast in YYYY-MM-DD format. For single day requests, use the same date as start_date. For multiple days, use the latest requested date to create an optimal date range that covers all requested days."
+    },
+    "unitGroup": {
+      "type": "string",
+      "required": false,
+      "default": "metric",
+      "enum": ["metric", "us", "uk"],
+      "description": "Temperature unit system"
+    },
+    "include": {
+      "type": "string",
+      "required": false,
+      "default": "days",
+      "enum": ["days", "hours", "current"],
+      "description": "Data granularity level"
+    }
+  },
+  "api_endpoint": "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{location}/{start_date}/{end_date}",
+  "api_method": "GET",
+  "auth": {
+    "type": "api_key",
+    "api_key": "your_api_key",
+    "query_param_name": "key",
+  },
+  "headers": {},
+  "timeout": "30",
+  "retry_config": {
+    "max_attempts": 3,
+    "initial_delay": 1.0,
+    "max_delay": 10.0,
+    "backoff_factor": 2.0
+  },
+  "response_status_processing": {
+    "success_criteria": {},
+    "error_mapping": {}
+  },
+  "response_extraction": {
+    "location": "resolvedAddress",
+    "all_daily_tempmax_data": "days[*].tempmax",
+    "all_daily_tempmin_data": "days[*].tempmin"
+  }
+},
+```
+
+#### GitHub API GET user info Request
+```json
+{
+  "function_name": "fetch_github_profile", 
+  "function_description": "Retrieve GitHub user profile public information",
+  "api_endpoint": "https://api.github.com/users/{username}",
+  "api_method": "GET",
+  "auth": {
+    "type": "bearer",
+    "api_key": "ghp_your_github_token_here"
+  },
+  "headers": {},
+  "timeout": "30",
+  "retry_config": {
+    "max_attempts": 3,
+    "initial_delay": 1.0,
+    "max_delay": 10.0,
+    "backoff_factor": 2.0
+  },
+  "parameter_specification": {
+    "username": {
+      "type": "string",
+      "required": true,
+      "description": "The username of the GitHub user to fetch profile information for"
+    }
+  },
+  "response_status_processing": {
+    "success_criteria": {},
+    "error_mapping": {}
+  },
+  "response_extraction": {}
+}
+```
+
+### Usage in Conversations
+
+Once configured, your AI agent will automatically identify when to use custom functions based on the caller's requests:
+
+**Caller:** *"What's the weather like in Sydney next weekend?"*
+
+**Agent:** *"Let me check the forecast for you..."*
+
+*[Agent calls get_weather_forecast function with next Saturday and Sunday as the date range, and other parameters if applicable (inclu. humidity in this example), then processes and returns the following response]*
+
+**Agent:** *"The temperature in Sydney next Saturday is 22°C with partly cloudy skies and 65% humidity, and the temperature on Sunday is 25°C with sunny skies and 50% humidity."*
+
+<Tip>
+The quality of the Agent's ability to use the custom function call is dependent on the custom function call's configuration, especially the prompting in the `description` fields (function description and parameter specification). 
+</Tip>
+
+### Troubleshooting
+
+#### Common Issues
+
+1. **Authentication Errors (401)**
+   - Verify API key/token is correct and not expired
+   - Check if prefix is required (e.g., `Bearer ` for GitHub)
+   - Ensure credentials are properly encrypted and stored
+
+2. **Parameter Mapping Errors**
+   - Verify JSON Schema syntax is valid
+   - Check that required parameters are properly defined
+   - Ensure parameter names match URL template placeholders
+
+3. **Response Processing Issues**
+   - Validate response extraction paths match actual API response structure
+   - Test API endpoint directly to understand response format
+   - Check for nested objects and array structures
+
+4. **Timeout Errors**
+   - Increase timeout value for slow APIs
+   - Implement retry configuration for transient failures
+   - Consider API rate limits and usage patterns
+
+#### Debug Information
+Enable debug logging to troubleshoot function call issues:
+- Check terminal logs for API request/response details
+- Verify authentication headers are correctly formatted
+- Monitor retry attempts and error responses
+
+### Cost & Limitations
+
+- **Cost**: Free for all agents
+- **Rate Limits**: Subject to your API provider's rate limits
+- **Timeout**: Maximum 60 seconds per API call
+- **Response Size**: No hard limit, but recommended to define specific Response Variables for key info extraction to avoid bloating Agent memory. 
+- **Concurrent Calls**: Not applicable, we only allow sequential function calls (one at a time) for now.
