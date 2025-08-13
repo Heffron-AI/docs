@@ -71,7 +71,8 @@
         "conversation-prompts",
         "prompt-refiner",
         "add-and-update-contacts",
-        "function-calls"
+        "function-calls",
+        "use-and-save-memories"
       ]
     },
     {
