@@ -1,0 +1,44 @@
+---
+title: 'Use and Save Memories'
+description: 'Learn how conversation memories work and how to enable them'
+---
+
+## What are Memories?
+Memories let your agent remember caller-specific facts (e.g., name, preferences, past requests) across calls. Memories are stored and retrieved per Contact.
+
+- Saved automatically after calls (if enabled)
+- Retrieved during live calls to personalize responses (if enabled)
+- Visible in each Contact's “Long-term Memories” section
+
+## Requirements
+- Memories are linked to a specific Contact. The caller must:
+  - Match an existing Contact, or
+  - You enable “Automatic contact creation” in Contact Settings.
+- This feature is available on paid plans.
+
+## Enable Memories (Agent Dashboard)
+In the Agent dashboard, scroll down to “Memory Settings”:
+- Save conversation memories: When enabled, the agent will save new/updated memories after each call.
+- Use conversation memories: When enabled, the agent will retrieve relevant memories during a live call.
+
+<Frame>
+  <img src="/images/contacts/contacts-memories.webp" alt="Contacts Memories Configuration" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+<Warning>
+Memories are saved and retrieved per Contact. If no matching Contact exists, enable “Automatic contact creation” in Contact Settings so the caller is captured as a Contact.
+</Warning>
+
+## How it Works (under the hood)
+- Save (post-call): The call transcript is analyzed to extract caller-specific facts, and those are saved as long-term memories scoped to that Contact.
+- Use (during call): The agent retrieves relevant memories scoped to that Contact and uses them as internal context to improve responses. This information is not read aloud to the caller.
+
+## View Memories in Contacts
+Open “Contacts” → select a Contact → scroll to “Long-term Memories” to see the saved memories and when they were last updated.
+
+## Tips
+- Turn on both:
+  - Automatic Contact Creation (in Contact Settings)
+  - Save conversation memories (in Memory Settings)
+- Keep using “Use conversation memories” for personalization and faster task completion.
+- You can revisit memories per Contact to curate and audit what the agent knows.
