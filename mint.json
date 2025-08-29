@@ -89,6 +89,12 @@
       ]
     },
     {
+      "group": "Tools",
+      "pages": [
+        "tools-overview"
+      ]
+    },
+    {
       "group": "Integration",
       "pages": [
         "overview-integration",
