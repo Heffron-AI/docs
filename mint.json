@@ -72,7 +72,8 @@
         "prompt-refiner",
         "add-and-update-contacts",
         "function-calls",
-        "use-and-save-memories"
+        "use-and-save-memories",
+        "individual-outbound-call"
       ]
     },
     {
@@ -83,9 +84,25 @@
       ]
     },
     {
+      "group": "Numbers",
+      "pages":[
+        "overview-numbers"
+      ]
+    },
+    {
       "group": "Call Logs",
       "pages": [
         "overview-call-logs"
+      ]
+    },
+    {
+      "group": "Batch Outbound Calls",
+      "pages": [
+        "batch-outbound-calls-overview",
+        "campaigns-batch-outbound-calls",
+        "uploads-batch-outbound-calls",
+        "contacts-batch-outbound-calls",
+        "jobs-batch-outbound-calls"
       ]
     },
     {
