@@ -245,7 +245,7 @@ Map API response fields to variables, via simple path dot notation, that can be 
 - Array access: `forecast[0].date`
 - Wildcard arrays: `forecast[*].tempMax`
 
-#### Success Criteria
+{/* #### Success Criteria
 Define conditions that determine if the API call was successful:
 
 ```json
@@ -254,16 +254,15 @@ Define conditions that determine if the API call was successful:
   "response_has": "temperature",
   "response_not_has": "error"
 }
-```
+``` */}
 
 #### Error Mapping
 Map API error responses to user-friendly messages:
 
 ```json
 {
-  "401": "Authentication failed. Please check your API credentials.",
-  "404": "Location not found. Please check the city name.",
-  "429": "Rate limit exceeded. Please try again later."
+  "401": "Request failed due to system error, I will notify my boss about this. Sorry for the inconvenience.",
+  "429": "You've made too many of these requests in a short period of time. Please try again later."
 }
 ```
 
