@@ -4,25 +4,71 @@ description: 'Learn how to add contacts'
 ---
 
 ## Automatically Add Contacts
-In 'Contact Settings', you can enable automatic contact creation. This feature will automatically create a contact for each caller if the caller's name is identified during the conversation.
+In `Contact Settings`, you can enable automatic contact creation. This feature will automatically create a contact for each caller if the caller's name is identified during the conversation.
 
-## Manually Add Contacts
-You can also manually add contacts to your contact list. 
-- Navigate to "Contacts" in the sidebar.
-- Click "Add Contact".
-- Enter the contact's name and phone number.
-- Click "Save".
+## Manually Add a single Contact
+You can manually add contacts to your contact list, one at a time. 
+1. Navigate to "Contacts" in the sidebar.
+2. Click "Add Contact".
+3. Enter the contact's name and phone number (and other details if you wish).
+4. Click "Save".
 
 <Frame>
   <img src="/images/contacts/contacts-add-contact.png" style={{ borderRadius: '0.5rem' }} />
 </Frame>
 
+
+## Batch Upload Contacts
+You can also upload multiple contacts at once, via a vCard/VCF file (this can be exported from your existing contacts list, as per guide right below). 
+
+1. Navigate to "Contacts" in the sidebar.
+2. Click "Add Contact".
+3. Select the "Batch Upload" option instead of "Single Contact"
+3. Select or Drag and Drop the vCard/VCF file containing the contacts you wish to upload.
+4. Review the processed contacts in the Preview screen and edit some if required.
+4. Click "Import Contacts" to save to contact list.
+
+<Warning>
+### Important Notes about batch uploading
+* The file must be a valid vCard/VCF file.
+* Each entry's number must be in E.164 format, unless Australian in which it is then optional.
+* Each entry must contain at least a number and a name for successful import.
+* If a contact has multiple numbers, only one number will be stored using this priority order: CELL > MOBILE > MAIN > WORK > HOME > OTHER
+* If your phone book contains duplicate contacts (same phone numbers), only the first contact (in alphabetical order) will be imported. Duplicates will be automatically ignored to prevent conflicts.
+</Warning>
+
+<Frame>
+  <img src="/images/contacts/contacts-batch-add-1.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+<Frame>
+  <img src="/images/contacts/contacts-batch-add-2.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+### Exporting Contacts from your Phone
+
+<Frame>
+  <img 
+    src="/images/contacts/contact-vcf-export.webp" 
+    style={{ 
+      height: '70vh',
+      width: '100%',
+    }} 
+  />
+</Frame>
 ## Updating Contacts
 
 Enabling automatic contact creation will automatically create a contact for each caller. If the caller's name is identified during the conversation. 
 
 Enabling automatic contact name updates will update the contact name if the caller's name from the most recent call is different from the name in the contact list.
 
+
 <Frame>
   <img src="/images/update-agent/update-agent-contacts-settings.png" style={{ borderRadius: '0.5rem' }} />
 </Frame>
+
+## Why use Contacts at all?
+
+There are plenty of benefits of using contacts:
+* Contact name will be included in the [Post Call SMS](/post-call-messaging#sms) sent to you, right below their number.
+* utilise the in-conversation memory saving and using feature, as this is always tied to a specific contact (see [Use and Save Memories](/use-and-save-memories)).
+* check the dynamic start sentence option under [Custom Prompt's](/conversation-prompts) `Opening Sentence` input field, which not only generates similar opening sentences but also include Contact's name.
