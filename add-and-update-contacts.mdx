@@ -19,7 +19,7 @@ You can manually add contacts to your contact list, one at a time.
 
 
 ## Batch Upload Contacts
-You can also upload multiple contacts at once, via a vCard/VCF file (this can be exported from your existing contacts list). 
+You can also upload multiple contacts at once, via a vCard/VCF file (this can be exported from your existing contacts list, as per guide right below). 
 
 1. Navigate to "Contacts" in the sidebar.
 2. Click "Add Contact".
@@ -33,6 +33,8 @@ You can also upload multiple contacts at once, via a vCard/VCF file (this can be
 * The file must be a valid vCard/VCF file.
 * Each entry's number must be in E.164 format, unless Australian in which it is then optional.
 * Each entry must contain at least a number and a name for successful import.
+* If a contact has multiple numbers, only one number will be stored using this priority order: CELL > MOBILE > MAIN > WORK > HOME > OTHER
+* If your phone book contains duplicate contacts (same phone numbers), only the first contact (in alphabetical order) will be imported. Duplicates will be automatically ignored to prevent conflicts.
 </Warning>
 
 <Frame>
@@ -42,6 +44,17 @@ You can also upload multiple contacts at once, via a vCard/VCF file (this can be
   <img src="/images/contacts/contacts-batch-add-2.png" style={{ borderRadius: '0.5rem' }} />
 </Frame>
 
+### Exporting Contacts from your Phone
+
+<Frame>
+  <img 
+    src="/images/contacts/contact-vcf-export.webp" 
+    style={{ 
+      height: '70vh',
+      width: '100%',
+    }} 
+  />
+</Frame>
 ## Updating Contacts
 
 Enabling automatic contact creation will automatically create a contact for each caller. If the caller's name is identified during the conversation. 
