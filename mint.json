@@ -112,9 +112,10 @@
       ]
     },
     {
-      "group": "Integration",
+      "group": "Integrations",
       "pages": [
         "overview-integration",
+        "knowledge-base-integrations",
         "webhook-integration-guide"
       ]
     },
