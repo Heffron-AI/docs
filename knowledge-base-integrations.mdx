@@ -1,0 +1,590 @@
+---
+title: Knowledge Base Property Integrations
+description: 'Connect external platforms and organise property information for your AI agents'
+---
+
+Knowledge Base & Integrations enables you to connect your real estate listing platforms (Realestate.com.au, Domain.com.au) and organise property listings into curated knowledge lists that your AI agents can access during calls. This powerful feature ensures your agents always have up-to-date information about your properties to answer caller inquiries accurately.
+
+### How It Works
+
+1. **Connect Integrations**: Link your Realestate.com.au or Domain.com.au account to sync property listings automatically
+2. **Organize Knowledge**: Create custom lists to group properties by status, type, or any criteria that makes sense for your business
+3. **Attach to Agents**: Give your AI agents access to specific knowledge lists so they can reference property information during calls
+4. **Auto-Sync**: Property data stays fresh with automatic synchronization twice daily at 12:00 PM and 6:00 PM AEDT
+
+### Quick Overview
+
+<CardGroup>
+  <Card title="Integrations" icon="plug" href="knowledge-base#integrations">
+    **Supported Platforms:**  
+    - Realestate.com.au
+    - Domain.com.au
+    - Google Calendar
+
+    **Auto-Sync:** Twice daily (12pm & 6pm AEDT)
+  </Card>
+
+  <Card title="Knowledge Base Lists" icon="list" href="knowledge-base#knowledge-base-lists">
+    **Features:**
+    - Quick Create templates
+    - Custom organization
+    - Visibility controls
+    - Auto-syncing lists
+    - Manual & integrated items
+  </Card>
+
+  <Card title="Smart Transcription" icon="microphone" href="knowledge-base#keyterm-generation">
+    **Automatic Enhancement:**
+    - Extracts hard-to-pronounce words from property addresses
+    - Improves speech recognition accuracy
+    - No configuration needed
+  </Card>
+
+  <Card title="Agent Integration" icon="robot" href="knowledge-base#attaching-to-agents">
+    **Agent Access:**
+    - Attach multiple lists per agent
+    - Granular field visibility
+    - Real-time property information
+    - Context-aware responses
+  </Card>
+</CardGroup>
+
+---
+
+## Integrations
+
+The Integrations page allows you to connect external platforms to automatically sync data into your Knowledge Base. Currently supported integrations include Realestate.com.au, Domain.com.au, and Google Calendar.
+
+<Frame>
+  {/* GIF: Overview of the Integrations page showing the three integration cards (REA, Domain, Google Calendar) with their connection status badges */}
+  <img src="/images/knowledge-base/integrations-overview.gif" style={{ borderRadius: '0.5rem', height: '350px', width: '700px' }} />
+</Frame>
+
+### Realestate.com.au
+
+Connect your Realestate.com.au agency account to automatically sync all active property listings.
+
+#### Prerequisites
+- Active Realestate.com.au account
+- Agency ID from your REA dashboard
+- Client credentials configured by Voqo AI (contact support if needed)
+- Approval from REA to allow Voqo AI to access your listings
+
+#### How to Connect
+
+1. Navigate to the **Integrations** page
+2. Click **Connect** on the Realestate.com.au card
+3. Enter your **Agency ID** when prompted
+4. Click **Connect & Sync**
+
+The initial sync will begin immediately, importing all active listings (both sale and rental properties) from your agency.
+
+#### What Gets Synced
+
+**Property Types:**
+- Houses
+- Apartments
+- Units
+- Townhouses
+- Villas
+- Land (including acreage/semi-rural)
+- Commercial properties
+
+**Property Information:**
+- Title and description
+- Property type and status (sale/lease)
+- Full address details
+- Features (bedrooms, bathrooms, parking, land size)
+- Pricing information
+- Images, videos, and virtual tours
+- Listing agent details
+- Important dates (listed, updated, sold)
+- Under Offer status
+
+#### Re-Syncing
+
+To manually refresh your property data:
+
+1. Click the **Resync** button on the Realestate.com.au card
+2. Wait for the sync to complete (typically 10-30 seconds)
+3. A toast notification will confirm the results
+
+<Note>
+Automatic syncs also occur twice daily at 12:00 PM and 6:00 PM AEDT, so your data stays fresh without manual intervention.
+</Note>
+
+---
+
+### Domain.com.au
+
+Connect your Domain.com.au profile (agent or agency) to automatically sync property listings.
+
+#### Prerequisites
+- Active Domain.com.au account (agent or agency)
+- Your profile name on Domain
+- API credentials configured by Voqo AI (contact support if needed)
+
+<Tip>
+Voqo AI is a verified Domain.com.au partner, ensuring secure and reliable integration with your listings.
+</Tip>
+
+#### How to Connect
+
+1. Navigate to the **Integrations** page
+2. Click **Connect** on the Domain.com.au card
+3. Choose your profile type:
+   - **Agent**: Individual agent profile
+   - **Agency**: Entire agency profile
+4. Search for your profile by name
+5. Select your profile from the search results
+6. Click **Connect & Sync**
+
+#### What Gets Synced
+
+Domain syncs the same comprehensive property information as Realestate.com.au, including:
+- All property types (houses, apartments, units, townhouses, villas, land, commercial)
+- Complete property details and features
+- Pricing and availability
+- Media (images, videos, virtual tours)
+- Listing agent information
+- Status information (live, under offer, recently updated)
+
+<Note>
+Domain combines apartments, units, and flats into a single type in their API, but Voqo AI correctly categorizes them for you in the Knowledge Base.
+</Note>
+
+#### Re-Syncing
+
+Use the **Resync** button on the Domain.com.au card to manually refresh your listings. Like Realestate.com.au, automatic syncs occur twice daily.
+
+---
+
+### Google Calendar
+
+Connect your Google Calendar to enable your AI agent to check availability and schedule appointments during calls.
+
+#### How to Connect
+
+1. Navigate to the **Integrations** page
+2. Click **Connect** on the Google Calendar card
+3. You'll be redirected to Google to authorize access
+4. Grant Voqo AI permission to access your calendar
+5. You'll be redirected back to the platform
+
+
+<Warning>
+Google Calendar integration is currently available but does not sync into the Knowledge Base. It provides direct calendar access for your AI agents during calls.
+</Warning>
+
+---
+
+### Disconnecting Integrations
+
+To disconnect any integration:
+
+1. Navigate to the **Integrations** page
+2. Click **Disconnect** on the connected integration
+3. Confirm the disconnection
+
+**What happens when you disconnect:**
+- **Realestate.com.au / Domain.com.au**: 
+  - Property items remain in your Knowledge Base but won't sync anymore
+  - Items are marked as "disconnected" and retain their integration source
+  - You can reconnect anytime to resume syncing
+- **Google Calendar**:
+  - AI agents lose access to your calendar
+  - No data is stored in the Knowledge Base
+
+---
+
+## Knowledge Base Lists
+
+Knowledge Base Lists are curated collections of knowledge items that make it easy to give your AI agents exactly the right information they need without overwhelming them with every property in your portfolio.
+
+### Creating Lists
+
+There are two ways to create Knowledge Base Lists:
+
+#### 1. Quick Create (Recommended)
+
+Quick Create templates let you instantly create commonly-used lists with smart filtering:
+
+<Frame>
+  {/* GIF: Clicking the Quick Create dropdown, showing the template sections (By Status, By Property Type, By Integration, By Features), hovering over templates to show descriptions, then clicking one (e.g., "Sale Properties") to create a list */}
+  <img src="/images/knowledge-base/integrations-kb-lists-quick-create.gif" style={{ borderRadius: '0.5rem', height: '350px', width: '700px' }} />
+</Frame>
+
+**Available Templates:**
+
+**By Status:**
+- **Sale Properties** - All properties currently listed for sale
+- **Lease Properties** - All properties currently listed for lease  
+- **Under Offer Properties** - Properties with pending contracts
+
+**By Property Type:**
+- **Houses Only** - Single-family houses
+- **Apartments & Units** - Multi-unit dwellings
+
+**By Integration:**
+- **Realestate.com.au Properties** - Only properties synced from REA
+- **Domain.com.au Properties** - Only properties synced from Domain
+- **Manual Properties** - Only manually created properties
+
+**By Features:**
+- **Family Homes (3+ Beds)** - Properties with 3 or more bedrooms
+
+**How to use Quick Create:**
+
+1. Navigate to the **Knowledge Base** page
+2. Click the **Quick Create** dropdown
+3. Select a template
+4. The list is created instantly with matching items
+5. Optionally select AI Agents to attach the list to
+
+<Tip>
+Lists created via Quick Create are **auto-syncing lists** - they automatically update whenever you sync your integrations. Items are added or removed based on the template's criteria, so your lists stay current without manual management.
+</Tip>
+
+#### 2. Manual Creation
+
+For custom lists with specific items:
+
+1. Click **Create New List**
+2. Enter a name and optional description
+3. Select items to include
+4. Configure visibility settings (optional)
+5. Click **Create**
+
+---
+
+### Managing Lists
+
+#### Editing Lists
+
+Click on any list card to open the edit dialog where you can:
+- Update the name and description
+- Add or remove items
+- Adjust visibility settings
+- Delete the list
+
+#### Synced Lists vs Manual Lists
+
+**Synced Lists** (created via Quick Create):
+- Automatically update during integration syncs
+- Items are added/removed based on template criteria
+- Indicated with a "Synced" badge
+- Ideal for dynamic categories (e.g., "Sale Properties")
+
+**Manual Lists**:
+- You control exactly which items are included
+- Don't automatically update during syncs
+- Ideal for hand-picked collections (e.g., "Featured Listings")
+
+---
+
+### Visibility Configuration
+
+Under each Knowledge Base List, you can configure exactly which information about your listings your AI agents can see and reference during calls.
+
+**Available Fields:**
+- Basic Information (title, description, property type)
+- Status & Availability (status, under offer indicator)
+- Location (full address)
+- Features (bedrooms, bathrooms, parking, sizes)
+- Pricing (list price, price range, auction date)
+- Media (images, videos, virtual tours)
+- Agent Details (name, email, phone)
+- Dates (listed, updated, sold)
+
+**Example Use Cases:**
+
+- Hide pricing from agents handling rental inquiries
+- Show only basic details for initial screening calls
+- Display full information for detailed property inquiries
+- Hide agent personal contact details for privacy
+
+<Note>
+Visibility settings apply to all items in the list. Individual items cannot have different visibility settings within the same list.
+</Note>
+
+---
+
+## Knowledge Base Items
+
+Knowledge Base Items are individual pieces of information - typically property listings - that can be organized into lists and accessed by your AI agents.
+
+### Viewing Items
+
+The Knowledge Base Items section displays all items in your workspace, with powerful search and filtering:
+
+<Frame>
+  {/* GIF: Overview of the Items section showing multiple property cards, using the search bar to filter by address or name, then clicking the filter button to open the filter popover and selecting some filters (e.g., Property Type: House, Status: Sale) */}
+  <img src="/images/knowledge-base/integrations-kb-items-search-filter.gif" style={{ borderRadius: '0.5rem', height: '350px', width: '700px' }} />
+</Frame>
+
+**Search by:**
+- Property address
+- Property title
+- Description
+
+**Filter by:**
+- **Property Type**: House, Apartment, Townhouse, Unit, Villa, Land, Commercial, Other
+- **Property Status**: Sale, Lease
+- **Integration Source**: Realestate.com.au, Domain.com.au, Manual
+
+### Creating Manual Items
+
+In addition to synced properties, you can create manual items for properties not in your integrated platforms:
+
+1. Click **Create Manual Item**
+2. Fill in the property details:
+   - Title and description
+   - Property type and status
+   - Address information
+   - Features (beds, baths, parking, sizes)
+   - Pricing details
+   - Listing agent information
+3. Click **Create**
+
+**When to create manual items:**
+- Off-market properties
+- Coming soon listings
+- Properties listed on other platforms
+- Historical reference properties
+
+### Editing Items
+
+Click on any item card to view and edit its details:
+
+**Synced Items** (from integrations):
+- Most fields are read-only (synced from source)
+- You can manually toggle "Under Offer" status
+- Changes may be overwritten on next sync
+
+**Manual Items**:
+- All fields are editable
+- Changes persist permanently
+
+<Warning>
+For synced items, the "Under Offer" status can be manually edited but will be reset to the integration's value on the next sync if the source data differs.
+</Warning>
+
+---
+
+## Syncing
+
+Keep your property data fresh with manual and automatic syncing.
+
+### Manual Syncing
+
+Trigger a sync anytime using the **Resync** dropdown or from the Integration's page:
+
+<Frame>
+  {/* GIF: Clicking the Re-Sync dropdown in the Knowledge Base page, showing options for "Sync All", "Sync Realestate.com.au", "Sync Domain.com.au", clicking one (e.g., Sync All), showing the loading spinners, then the success toast notification with sync results */}
+  <img src="/images/knowledge-base/integrations-manual-sync.gif" style={{ borderRadius: '0.5rem', height: '350px', width: '700px' }} />
+</Frame>
+
+**Options:**
+- **Sync All** - Syncs all connected integrations sequentially
+- **Sync [Integration]** - Syncs a specific integration only
+
+**What happens during sync:**
+
+1. Fetches active listings from the integration API
+2. Creates new items for properties not in your Knowledge Base
+3. Updates existing items with latest data
+4. Removes inactive/sold properties no longer in the source
+5. Updates all synced lists based on their template criteria
+6. Regenerates smart transcription data (keyterms)
+
+**Typical sync duration:** 10-30 seconds depending on number of properties
+
+### Automatic Syncing
+
+Automatic syncs run twice daily at:
+- **12:00 PM AEDT**
+- **6:00 PM AEDT**
+
+These syncs keep your data fresh without any manual intervention. You'll see the "Last Synced" timestamp update on integration cards after each automatic sync.
+
+<Note>
+Automatic syncs use the same process as manual syncs and update all active integrations across all workspaces. The schedule is system-controlled and cannot be customized per workspace yet.
+</Note>
+
+---
+
+## Attaching to Agents
+
+Give your AI agents access to property information by attaching Knowledge Base Lists to them.
+
+### How to Attach and Dettach Lists from AI Agents
+
+1. Navigate to **Agents** tab, for a specific agent
+2. Scroll to the **Knowledge Base Lists** section under **Conversation Settings**
+3. Click Plus button
+4. Select the lists you want to attach
+5. Click **Save**
+
+<Frame>
+  {/* GIF: In Agent Settings, scrolling to the Knowledge Base section, clicking a button/dropdown to select KB lists, choosing 2-3 lists from a list selector or multi-select dropdown, then clicking Save and showing a success message */}
+  <img src="/images/knowledge-base/integrations-kb-agent-attach.gif" style={{ borderRadius: '0.5rem', height: '350px', width: '700px' }} />
+</Frame>
+
+**Best Practices:**
+
+- Attach only relevant lists (don't overwhelm the agent with every property)
+- Use specific lists for specialized agents (e.g., "Lease Properties" list for a rentals-focused agent)
+- Combine multiple lists for comprehensive agents (e.g., "Sale Properties" + "Under Offer Properties")
+
+### What Agents Can Do
+
+Once lists are attached, your AI agent can:
+
+**Reference Property Details:**
+- Provide accurate property information when callers ask
+- Describe features, pricing, and availability
+- Share listing agent contact details
+
+**Answer Common Questions:**
+- "What properties do you have for sale in Sydney?"
+- "Do you have any 3-bedroom houses under $800k?"
+- "What's the address of your listing on Main Street?"
+- "Is that property still available or is it under offer?"
+
+**Example Conversation:**
+
+**Caller:** *"I saw your listing for the house on 123 Smith Street. Can you tell me more about it?"*
+
+**Agent:** *"Yes! 123 Smith Street is a beautiful 4-bedroom, 2-bathroom house listed for sale at $950,000. It features a double garage, 600 square meter land size, and was recently updated with a modern kitchen. Would you like to schedule an inspection?"*
+
+<Tip>
+The agent's responses are based on the visibility configuration of the attached lists. If pricing is hidden, the agent won't mention specific prices.
+</Tip>
+
+---
+
+## Keyterm Generation
+
+Voqo AI automatically enhances speech recognition accuracy for property addresses using smart keyterm generation. This advanced feature works behind the scenes to help your agents better understand hard-to-pronounce suburb names, street names, and property addresses during calls.
+
+### How It Works
+
+**Automatic Extraction:**
+1. When you sync properties, the system analyzes all property addresses
+2. Extracts uncommon words using word frequency analysis (wordfreq library)
+3. Filters out common words like "street", "road", "avenue", "circuit"
+4. Preserves hard-to-pronounce words like "Woolloomooloo", "Castlereagh", "Pakenham"
+5. Stores these keyterms in each Knowledge Base List's cache
+
+**Example:**
+
+Without keyterms:
+- Caller says: "Do you have properties in Woolloomooloo?"
+- Transcribed as: "Do you have properties in woolly moo loo?"
+
+With keyterms:
+- Caller says: "Do you have properties in Woolloomooloo?"
+- Transcribed as: "Do you have properties in Woolloomooloo?" ✓
+
+### Token Limits & Ranking
+
+The AI's transcriber has a limit of 500 tokens for keyterms. Voqo AI uses a safe limit of 400 tokens to ensure reliability:
+
+**Priority Ranking:**
+1. **Manual keyterms** (added by you in Agent Settings) - Always included first
+2. **Auto-generated keyterms** (from property addresses) - Fill remaining space
+
+This ensures your custom business terminology is always included while still benefiting from automatic address extraction.
+
+<Note>
+You don't need to configure anything for keyterm generation - it happens automatically when you sync properties and attach lists to agents. Just another way Voqo AI makes your AI agents smarter!
+</Note>
+
+### Adding Manual Keyterms
+
+You can also add custom keyterms in Agent Settings → Advanced → Keyterms:
+
+**Examples of manual keyterms:**
+- Unique property names ("The Grand Pavilion")
+- Local area nicknames ("The Shire", "The Peninsula")
+- Your agency or brand name if uncommon
+- Specific street names not captured automatically
+
+<Warning>
+Keyterms in general (Manual and Auto-generated together) are limited to 50 terms (~200 tokens). So ensure that you leave some room for auto-generated address keyterms.
+</Warning>
+
+---
+
+## Best Practices
+
+### Integration Management
+
+✅ **Do:**
+- Connect integrations before creating lists (easier to organize from the start)
+- Keep integrations connected for automatic syncs
+- Verify sync results after initial connection
+- Use manual sync when you know listings have changed
+
+❌ **Don't:**
+- Disconnect/reconnect integrations frequently (can cause duplicate items)
+- Manually edit synced items extensively (changes may be overwritten)
+- Ignore sync error notifications
+
+---
+
+### List Organization
+
+✅ **Do:**
+- Use Quick Create templates for standard categories
+- Create manual lists for hand-picked featured properties
+- Use descriptive names and descriptions for lists
+- Keep lists focused on specific purposes (sale vs lease, location-based, price ranges)
+- Attach multiple complementary lists to agents
+
+❌ **Don't:**
+- Create too many overlapping lists (confusing for agents)
+- Attach every list to every agent (information overload)
+- Use generic names like "List 1" or "Properties"
+
+---
+
+### Agent Configuration
+
+✅ **Do:**
+- Start with 1-2 focused lists per agent
+- Test agent responses after attaching new lists
+- Use visibility settings to hide sensitive information
+- Update your agent's prompt to mention property knowledge
+- Review what information the agent is sharing in calls
+
+❌ **Don't:**
+- Attach 10+ lists to a single agent (performance impact)
+- Assume the agent will automatically know how to use the data (prompt guidance helps)
+- Share pricing on initial screening calls (configure visibility accordingly)
+
+---
+
+### Data Quality
+
+✅ **Do:**
+- Ensure property details are accurate in Realestate.com.au/Domain.com.au
+- Update "Under Offer" status manually when contracts are exchanged
+- Add manual items for off-market properties
+- Keep descriptions clear and concise
+
+❌ **Don't:**
+- Rely on outdated integration data (sync regularly)
+- Mix manual and synced items without clear organization
+- Leave sold properties in your integration platforms (causes sync clutter)
+
+---
+
+## Need Help?
+
+If you encounter any issues or have questions about Knowledge Base & Integrations:
+
+1. Check this documentation for troubleshooting steps
+2. Email us at adam@voqo.ai
+
+We're here to help you get the most out of your property data and AI agents!
