@@ -15,6 +15,7 @@
       "to": "#07C983"
     }
   },
+  "openapi": ["/api-reference/openapi.json"],
   "topbarLinks": [
     {
       "name": "Support",
@@ -26,6 +27,10 @@
     "url": "https://platform.voqo.ai/auth/login"
   },
   "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
     {
       "name": "Change Log",
       "url": "change-log"
@@ -123,6 +128,13 @@
       "pages": [
         "change-log/product-updates",
         "change-log/pricing-updates"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/endpoint/start-call"
       ]
     }
   ],
