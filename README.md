@@ -1,32 +1,33 @@
-# Mintlify Starter Kit
+# Voqo AI Documentation
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+This repository contains the official documentation for [Voqo AI](https://www.voqo.ai) — an AI voice agent platform.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+Built with [Mintlify](https://mintlify.com).
 
-### Development
+## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview documentation changes locally:
 
-```
+```bash
 npm i -g mintlify
 ```
 
-Run the following command at the root of your documentation (where mint.json is)
+Run the following command at the root of this repository (where `mint.json` is located):
 
-```
+```bash
 mintlify dev
 ```
 
-### Publishing Changes
+## Publishing
 
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
+Changes pushed to the default branch are automatically deployed to production via the Mintlify GitHub App.
 
-#### Troubleshooting
+## Support
 
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+- Email: [support@voqo.ai](mailto:support@voqo.ai)
+- WhatsApp Community: https://chat.whatsapp.com/CHL5omlbYJH5vreq0SgtCu
+
+## Troubleshooting
+
+- **Mintlify dev isn't running** — Run `mintlify install` to re-install dependencies.
+- **Page loads as a 404** — Make sure you are running in the folder containing `mint.json`.
