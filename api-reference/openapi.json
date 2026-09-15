@@ -14017,12 +14017,7 @@
           {
             "to_phone": "+61400000000",
             "from_phone": "+61868656583",
-            "record": true,
-            "parameters": {
-              "first_name": "Sarah",
-              "meeting_time": "Tuesday 10am",
-              "agency_name": "Ray White Newcastle"
-            }
+            "record": true
           }
         ]
       },
