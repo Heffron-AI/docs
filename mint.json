@@ -15,7 +15,9 @@
       "to": "#07C983"
     }
   },
-  "openapi": ["/api-reference/openapi.json"],
+  "openapi": [
+    "/api-reference/openapi.json"
+  ],
   "topbarLinks": [
     {
       "name": "Support",
@@ -146,5 +148,11 @@
   ],
   "footerSocials": {
     "linkedin": "https://www.linkedin.com/company/voqo-ai"
+  },
+  "api": {
+    "baseUrl": "https://api.voqo.ai",
+    "auth": {
+      "method": "bearer"
+    }
   }
 }
