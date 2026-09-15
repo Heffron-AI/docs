@@ -5,6 +5,12 @@
     "description": "This is the API for the Hefferon AI Platform.",
     "version": "0.1"
   },
+  "servers": [
+    {
+      "url": "https://api.voqo.ai",
+      "description": "Production"
+    }
+  ],
   "paths": {
     "/api/v1/webhooks/mobilemessage/inbound-sms": {
       "post": {
@@ -14009,14 +14015,14 @@
         "description": "Request schema for starting a call. 'from_phone' is optional;'Parameters' includes custom key-value data that can be used in the call.",
         "examples": [
           {
+            "to_phone": "+61400000000",
+            "from_phone": "+61868656583",
+            "record": true,
             "parameters": {
-              "Department": "IT",
-              "Language": "English",
-              "Location": "Sydney",
-              "Role": "Linux Administrator",
-              "fullName": "John Doe"
-            },
-            "to_phone": "+61451660338"
+              "first_name": "Sarah",
+              "meeting_time": "Tuesday 10am",
+              "agency_name": "Ray White Newcastle"
+            }
           }
         ]
       },
